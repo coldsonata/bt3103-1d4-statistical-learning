@@ -128,6 +128,7 @@ h1 {letter-spacing: 6px}
     The data has already been loaded for you within the variable df.</p>
     <pre class="w3-border" style="padding:20px">
 <code contenteditable id="answer1b">import statsmodels.formula.api as smf
+import scipy
 ols = smf.ols(formula='mpg ~ weight', data=df)
 ols_result = ols.fit()
 print(ols_result.summary())
