@@ -37,7 +37,7 @@ Resources:
     Properties:
       CodeUri: ./lambda-deploy.zip
       Layers:
-        - arn:aws:lambda:us-east-1:432853048830:layer:bt3103-dependency-packages:3
+        - arn:aws:lambda:us-east-1:432853048830:layer:bt3103-dependency-packages:4
       Description: Statistical Learning by 1d4
       FunctionName:
         Ref: "LambdaFuncName"
