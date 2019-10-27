@@ -4,6 +4,7 @@ from question_checker import *
 import statsmodels.formula as smf
 import numpy as np
 import pandas as pd
+import scipy
 
 
 def lambda_handler(event, context):
