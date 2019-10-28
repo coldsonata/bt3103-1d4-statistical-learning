@@ -11,7 +11,7 @@ RUN apk add --no-cache --virtual .build-deps gcc musl-dev \
 
 RUN pip install awscli
 
-RUN sudo apt-get install libssl-dev
+RUN pip install regex
 
 RUN pip install aws-sam-cli
 
