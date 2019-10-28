@@ -59,7 +59,24 @@ Resources:
         Ref: "LambdaRuntime"
       Timeout:
         Ref: "LambdaTimeout"
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: "dynamoLogs"
+      Environment:
+        Variables:
+          TABLE_NAME: "dynamoLogs"
     Type: AWS::Serverless::Function
+  DynamoDBTable:
+    Type: "AWS::DynamoDB::Table"
+    Properties:
+      TableName: "dynamoLogs"
+      AttributeDefinitions:
+        - AttributeName: logId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: logId
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
 
 
 

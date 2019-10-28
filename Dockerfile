@@ -14,6 +14,8 @@ RUN pip install aws-sam-cli
 
 RUN apk add zip
 
+RUN apk del .build-deps 
+
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
