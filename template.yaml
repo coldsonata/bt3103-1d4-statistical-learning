@@ -72,10 +72,10 @@ Resources:
             TableName: !Ref TableName
       Environment:
         Variables:
-          TABLE_NAME: !Ref TableName
+          TABLE_NAME: !Ref TableName    
     Type: AWS::Serverless::Function
   DynamoDBTable:
-    Type: "AWS::DynamoDB::Table"
+    Type: AWS::DynamoDB::Table
     Properties:
       TableName: !Ref TableName
       AttributeDefinitions:
