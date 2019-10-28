@@ -13,7 +13,7 @@ def save_logs(logData):
     table = dynamodb.Table('lambdalogs')
     
     log = logData.copy() 
-    log['itemId'] = str(timestamp) 
+    log['logId'] = str(timestamp) 
     log['createdAt'] = timestamp
 
     table.put_item(Item=log)
