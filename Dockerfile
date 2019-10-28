@@ -9,9 +9,9 @@ RUN apk add --no-cache --virtual .build-deps gcc musl-dev \
     && pip install cython \
     && apk del .build-deps 
 
-RUN pip3 install awscli 
+RUN pip3 install awscli
 
-RUN pip3 install aws-sam-cli
+RUN pip install aws-sam-cli
 
 RUN apk add zip
 
