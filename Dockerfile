@@ -6,12 +6,9 @@ LABEL "com.github.actions.icon"="upload-cloud"
 LABEL "com.github.actions.color"="purple"
 
 RUN apk add --no-cache --virtual .build-deps gcc musl-dev \
-    && pip install cython \
-    && apk del .build-deps 
+    && pip install cython 
 
 RUN pip install awscli
-
-RUN pip install regex
 
 RUN pip install aws-sam-cli
 
