@@ -15,15 +15,14 @@ aws s3 cp --acl public-read lambda-deploy-overlay.tgz "$OVERLAY_S3URL"
 cd src; zip -r ../lambda-deploy.zip *
 cd ..
 
-aws cloudformation validate-template \
-    --template-body file://template.yaml
+sam validate --template file://template.yaml
  
-aws cloudformation package \
+sam package \
    --template-file template.yaml \
    --output-template-file packaged.yaml \
    --s3-bucket "${BUCKET_NAME}" 
 
-if  aws cloudformation deploy \
+if  sam deploy \
         --stack-name ${LAMBDA_FUNC_NAME} \
         --template-file packaged.yaml \
         --capabilities CAPABILITY_IAM \

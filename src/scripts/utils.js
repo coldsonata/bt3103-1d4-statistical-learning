@@ -18,6 +18,18 @@ const coroutine = nextValue => iterator => {
 
 const delay = (ms, result) =>
   new Promise(resolve => setTimeout(() => resolve(result), ms));
+  
+// This one's stolen from https://stackoverflow.com/questions/3115982/how-to-check-if-two-arrays-are-equal-with-javascript
+const arraysEqual = function(a, b) {
+  if (a === b) return true;
+  if (a == null || b == null) return false;
+  if (a.length != b.length) return false;
+
+  for (let i = 0; i < a.length; ++i) {
+    if (a[i] !== b[i]) return false;
+  }
+  return true;
+}
 
 Vue.component("variableblock", {
     props: ["name"],
@@ -166,7 +178,7 @@ Vue.component("rsqbar", {
     },
     methods : {
         *adjustBar() {
-            while (Math.abs(this.size - this.targetValue) > 0.001) {
+            while (Math.abs(this.size - this.targetValue) > 0.00001) {
                 if (this.size < this.targetValue) {
                     this.colour = "#EEA";
                 } else {

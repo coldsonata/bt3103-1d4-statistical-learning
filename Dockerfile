@@ -11,6 +11,8 @@ RUN apk add --no-cache --virtual .build-deps gcc musl-dev \
 
 RUN pip3 install awscli 
 
+RUN pip3 install aws-sam-cli
+
 RUN apk add zip
 
 ADD entrypoint.sh /entrypoint.sh
