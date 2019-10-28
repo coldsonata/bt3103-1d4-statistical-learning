@@ -40,6 +40,7 @@ Resources:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
         - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+        - 
       Path: /
     Type: AWS::IAM::Role
   LambdaFunc:
@@ -70,15 +71,18 @@ Resources:
         Ref: "LambdaTimeout"
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref TableName
+            TableName: 
+              Ref: TableName
       Environment:
         Variables:
-          TABLE_NAME: !Ref TableName    
+          TABLE_NAME: 
+            Ref: TableName 
     Type: AWS::Serverless::Function
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: !Ref TableName
+      TableName: 
+        Ref: TableName
       AttributeDefinitions:
         - AttributeName: logId
           AttributeType: S
