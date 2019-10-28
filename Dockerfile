@@ -11,7 +11,7 @@ RUN apk add --no-cache --virtual .build-deps gcc musl-dev \
 
 RUN pip install awscli
 
-RUN pip install aws-sam-cli
+RUN sudo pip install aws-sam-cli
 
 RUN apk add zip
 
