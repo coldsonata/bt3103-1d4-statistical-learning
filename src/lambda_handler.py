@@ -28,4 +28,3 @@ def lambda_handler(event, context):
         postReq = json.loads(event.get('body', {})) 
         save_logs(postReq)
         return question_checker(postReq)
-        
