@@ -36,6 +36,7 @@ Resources:
             Principal:
               Service:
                 - lambda.amazonaws.com
+                - dynamodb.amazonaws.com
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
         - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess

@@ -1,6 +1,4 @@
 import json
-import time
-import requests
 import os
 import boto3
 from datetime import datetime
