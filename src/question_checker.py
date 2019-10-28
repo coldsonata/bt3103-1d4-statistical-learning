@@ -59,7 +59,7 @@ def question_1a(postReq):
 def question_1b(postReq):
     answer = json.loads(postReq["answer"])
     expected = {'response': 'mpg', 'predictors': ['Intercept', 'acceleration']}
-    gotten = get_output(answer, "import pandas as pd\ndf=pd.read_csv('./data/dataset.csv')", "", '{"response":ols_result.model.endog_names, "predictors":ols_result.model.exog_names}')
+    gotten = get_output(answer, "import scipy\nimport pandas as pd\ndf=pd.read_csv('./data/dataset.csv')", "", '{"response":ols_result.model.endog_names, "predictors":ols_result.model.exog_names}')
     gotten = json.loads(gotten)
     solved = (expected == gotten["output"])
     return {
