@@ -65,9 +65,8 @@ let fuee = new Vue({
             }
         },
         submit1b : async function() {
-            let entered = $("#answer1b").text();
+            let entered = parseCode("answer1b");
             this.q1b.status = "checking";
-            
             let result = await new Promise((resolve, reject) => {
               const nekoUrl = "https://1b1u6ce6m6.execute-api.us-east-1.amazonaws.com/Prod/lambda_handler";
               const xmlHttp = new XMLHttpRequest();
@@ -79,24 +78,19 @@ let fuee = new Vue({
               xmlHttp.open("POST", nekoUrl, true); 
               xmlHttp.send(JSON.stringify({
                 questionId:"1b", 
-                answer:JSON.stringify(entered)
+                answer: JSON.stringify(entered)
               }));
             });
-            let resultInfoTest = JSON.parse(result);
-            console.log(resultInfoTest);
-            
-            let resultInfo = {correct:false};
-            let expected = JSON.stringify("import statsmodels.formula.api as smf\nols = smf.ols(formula='mpg ~ acceleration', data=df)\nols_result = ols.fit()\nprint(ols_result.summary())\n");
-            entered = JSON.stringify(entered);
-            resultInfo.correct = (expected === entered);
-            setTimeout( () => {
-              if (resultInfo.correct) {
-                this.q1b.status = "correct";
-                this.q1b.solved = true;
-              } else {
-                this.q1b.status = "incorrect";
-              }
-            }, 1000 + 3000 * Math.random());
+            let resultInfo = JSON.parse(result);
+            if (resultInfo.correct) {
+              this.q1b.status = "correct";
+              this.q1b.solved = true;
+            } else {
+              this.q1b.status = "incorrect";
+            }
         }
+    },
+    mounted() {
+        initializeCodeblocks(["answer1b"]);
     }
 })

@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title>Coding Test</title>
+    <!-- Keep these in head -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/python/python.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css"
+    />
+    <link rel="stylesheet" href="https://codemirror.net/theme/night.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue-codemirror@4.0.6/dist/vue-codemirror.min.js"></script>
+  </head>
+  <body>
+    
+    <div id="app">
+      <textarea id="editor">
+# This is the first code block
+def testFunction(a, b):
+    return a + b</textarea>
+      <div>
+        <p @click="execute('editor')">Submit</p>
+      </div>
+      
+      <textarea id="editor2">
+# This is the second code block
+def meow(times):
+    for i in range(times):
+        print("Nya!")</textarea>
+      <div>
+        <p @click="execute('editor2')">Submit</p>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="main.js"></script>
+  </body>
+</html>

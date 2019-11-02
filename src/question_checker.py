@@ -19,12 +19,14 @@ def alset_api(postReq):
     shown = postReq["shown"]["0"]
     userToken = postReq["userToken"]
     
+    
+    
     # Calculate different feedbacks
     allFeedback = {
       "isComplete": True,
-      "jsonFeedback": { "code": userToken },
-      "htmlFeedback": "<div>{}</div>".format(shown),
-      "textFeedback": shown
+      "jsonFeedback": { "code": userToken, "message": "Thank you for your feedback!" },
+      "htmlFeedback": "<div>{}</div>".format("Thank you for your feedback!"),
+      "textFeedback": "Thank you for your feedback!"
     }
     return {
         "statusCode": 200,

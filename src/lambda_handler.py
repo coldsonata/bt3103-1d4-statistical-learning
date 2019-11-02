@@ -1,6 +1,6 @@
 import json
 import os
-import boto3
+import boto3 
 from datetime import datetime
 from content_parser import *
 from question_checker import *
@@ -19,12 +19,13 @@ def save_logs(logData):
     table.put_item(Item=log)
 
 def lambda_handler(event, context):
-    dynamodb = boto3.resource('dynamodb')
+    # dynamodb = boto3.resource('dynamodb')
     method = event.get('httpMethod', {})
     if method == 'GET':
         path = event.get('path')
         return content_parser(path)
     if method == 'POST':
         postReq = json.loads(event.get('body', {})) 
-        save_logs(postReq)
+        # save_logs(postReq)
         return question_checker(postReq)
+        

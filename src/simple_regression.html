@@ -1,155 +1,173 @@
-<!DOCTYPE html>
 <html>
-<title>Simple Linear Regression</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="page_template/w3.css">
-<link rel="stylesheet" href="page_template/style.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<style>
-body,h1 {font-family: "Raleway", Arial, sans-serif}
-h1 {letter-spacing: 6px}
-.w3-row-padding img {margin-bottom: 12px}
-</style>
-<body>
-
-<!-- !PAGE CONTENT! -->
-<div class="w3-content" id="app" style="max-width:1500px">
-
-<!-- Header -->
-<header class="w3-panel w3-center w3-opacity">
-  <h1 class="w3-xlarge">Regression Analysis</h1>
-  <h1>Simple Linear Regression</h1>
+  <head>
+    <title>Simple Linear Regression</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Keep these in head -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/python/python.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css"
+    />
+    <link rel="stylesheet" href="https://codemirror.net/theme/night.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue-codemirror@4.0.6/dist/vue-codemirror.min.js"></script>
   
-  <div class="w3-padding-16">
-    <div class="w3-bar w3-border">
-      <a href="#intro" class="w3-bar-item w3-button">Introduction</a>
-      <a href="#math" class="w3-bar-item w3-button">The Mathematics</a>
-      <a href="#code" class="w3-bar-item w3-button">The Code</a>
-      <a href="#exercise1" class="w3-bar-item w3-light-grey">Exercise 1</a>
-      <a href="#exercise2" class="w3-bar-item w3-light-grey">Exercise 2</a>
+    <link rel="stylesheet" href="page_template/w3.css">
+    <link rel="stylesheet" href="page_template/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-147552064-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-147552064-1');
+  </script>
+
+  <style>
+  body,h1 {font-family: "Raleway", Arial, sans-serif}
+  h1 {letter-spacing: 6px}
+  .w3-row-padding img {margin-bottom: 12px}
+  </style>
+  <body>
+
+  <!-- !PAGE CONTENT! -->
+  <div class="w3-content" id="app" style="max-width:1500px">
+
+  <!-- Header -->
+  <header class="w3-panel w3-center w3-opacity">
+    <h1 class="w3-xlarge">Regression Analysis</h1>
+    <h1>Simple Linear Regression</h1>
+    
+    <div class="w3-padding-16">
+      <div class="w3-bar w3-border">
+        <a href="#intro" class="w3-bar-item w3-button">Introduction</a>
+        <a href="#math" class="w3-bar-item w3-button">The Mathematics</a>
+        <a href="#code" class="w3-bar-item w3-button">The Code</a>
+        <a href="#exercise1" class="w3-bar-item w3-light-grey">Exercise 1</a>
+        <a href="#exercise2" class="w3-bar-item w3-light-grey">Exercise 2</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Introduction Container -->
+  <div class="w3-container" id="intro" style="padding:64px 16px">
+    <div class="w3-content" style="max-width:800px">
+      <div class="w3-opacity">
+        <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Simple Linear Regression</span></h5>
+        <p>Welcome to a tutorial on regression analysis. Regression Analysis is a statistical process of estimate relationships between a depedent variable and one or more independent variables. In this section of the tutorial, we will focus on the simplest form of regression, the Simple Linear Regression.</p>
+      </div>
+      <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/simple_linear_ex_plot.png" class="w3-image"></img>
+      <div class="w3-opacity">
+      <p>Above we have an example of a simple linear regression, a basic x-y plot. Miles Per Gallon (MPG) is the dependent variable and Weight is the independent variable.</p>
+      <p>We plot this in order to find a relationship between the two variables, so that we can use our independent variable, weight, to predict future values of our dependent variable, MPG. With this plot, we can easily tell that two variables have a negative relationship. A higher weight is proportionate to a lower MPG value.</p>
+      <p>However, this graph is not enough to help us predict future values. To do that, we have to dive into the mathematics involved.
+      </div>
     </div>
   </div>
-</header>
 
-<!-- Introduction Container -->
-<div class="w3-container" id="intro" style="padding:64px 16px">
-  <div class="w3-content" style="max-width:800px">
-    <div class="w3-opacity">
-      <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Simple Linear Regression</span></h5>
-      <p>Welcome to a tutorial on regression analysis. Regression Analysis is a statistical process of estimate relationships between a depedent variable and one or more independent variables. In this section of the tutorial, we will focus on the simplest form of regression, the Simple Linear Regression.</p>
-    </div>
-    <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/simple_linear_ex_plot.png" class="w3-image"></img>
-    <div class="w3-opacity">
-    <p>Above we have an example of a simple linear regression, a basic x-y plot. Miles Per Gallon (MPG) is the dependent variable and Weight is the independent variable.</p>
-    <p>We plot this in order to find a relationship between the two variables, so that we can use our independent variable, weight, to predict future values of our dependent variable, MPG. With this plot, we can easily tell that two variables have a negative relationship. A higher weight is proportionate to a lower MPG value.</p>
-    <p>However, this graph is not enough to help us predict future values. To do that, we have to dive into the mathematics involved.
+  <!-- Mathematics Container-->
+  <div class="w3-container" id="math" style="padding:64px 16px">
+    <div class="w3-content" style="max-width:800px">
+      <div class="w3-opacity  w3-center">
+        <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">The Mathematics Involved</span></h5>
+        <p>To make the predictions we want, we have to reduce the above graph into an equation. $${MPG = intercept + coefficient_{weight} * Weight}$$</p>
+        <p>The graph above has the specific equation of: $${MPG = 46.32 + -0.0077*Weight}$$</p>
+        <p>This tells us that for each unit of increase in weight, MPG will have a decrease of -0.0077.</p> 
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Mathematics Container-->
-<div class="w3-container" id="math" style="padding:64px 16px">
-  <div class="w3-content" style="max-width:800px">
-    <div class="w3-opacity  w3-center">
-      <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">The Mathematics Involved</span></h5>
-      <p>To make the predictions we want, we have to reduce the above graph into an equation. $${MPG = intercept + coefficient_{weight} * Weight}$$</p>
-      <p>The graph above has the specific equation of: $${MPG = 46.32 + -0.0077*Weight}$$</p>
-      <p>This tells us that for each unit of increase in weight, MPG will have a decrease of -0.0077.</p> 
-    </div>
-  </div>
-</div>
-
-<!-- Code Container-->
-<div class="w3-container" id="code" style="padding:64px 16px">
-  <div class="w3-content" style="max-width:800px">
-    <div class="w3-opacity">
-      <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">The Python Code</span></h5>
-      <p>First, we have to load in the dataset.</p>
-      <pre class="w3-border">
-      <code>
-        import pandas as pd
-        df = pd.read_csv("dataset.csv")
-      </code>
-      </pre>
-      <br>
-      <p>After that, we can take a quick peek at our dataset.</p>
-      <pre class="w3-border">
+  <!-- Code Container-->
+  <div class="w3-container" id="code" style="padding:64px 16px">
+    <div class="w3-content" style="max-width:800px">
+      <div class="w3-opacity">
+        <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">The Python Code</span></h5>
+        <p>First, we have to load in the dataset.</p>
+        <pre class="w3-border">
         <code>
-          df.head(10)
+          import pandas as pd
+          df = pd.read_csv("dataset.csv")
         </code>
-      </pre>
-      <br>
-    </div>
-    <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/simple_linear_ex_peek.png">
-    <div class="w3-opacity">
-      <p>To create our regression model, we will use the following code: </p>
-      <pre class="w3-border">
-        <code>
-          import statsmodels.formula.api as smf
-          ols = smf.ols(formula='mpg ~ weight', data=df)
-          ols_result = ols.fit()
-          print(ols_result.summary())
-        </code>
-      </pre>
-    </div>
-    <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/simple_linear_ex_summary.png">
-    <div class="w3-opacity">
-      <p>This table may seen daunting, but for now, focus at the middle of it.</p>
-    </div>
-    <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/simple_linear_ex_summary_zoom.png">
-    <div class="w3-opacity">
-      <p>For now, we are only interested in the coefficients. Remember our mathematical equation? $${MPG = 46.32 + -0.0077*Weight}$$</p>
-      <p>The summary provides us with the values for the intercept, and the coefficient of our weight variable.</p>
+        </pre>
+        <br>
+        <p>After that, we can take a quick peek at our dataset.</p>
+        <pre class="w3-border">
+          <code>
+            df.head(10)
+          </code>
+        </pre>
+        <br>
+      </div>
+      <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/simple_linear_ex_peek.png">
+      <div class="w3-opacity">
+        <p>To create our regression model, we will use the following code: </p>
+        <pre class="w3-border">
+          <code>
+            import statsmodels.formula.api as smf
+            ols = smf.ols(formula='mpg ~ weight', data=df)
+            ols_result = ols.fit()
+            print(ols_result.summary())
+          </code>
+        </pre>
+      </div>
+      <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/simple_linear_ex_summary.png">
+      <div class="w3-opacity">
+        <p>This table may seen daunting, but for now, focus at the middle of it.</p>
+      </div>
+      <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/simple_linear_ex_summary_zoom.png">
+      <div class="w3-opacity">
+        <p>For now, we are only interested in the coefficients. Remember our mathematical equation? $${MPG = 46.32 + -0.0077*Weight}$$</p>
+        <p>The summary provides us with the values for the intercept, and the coefficient of our weight variable.</p>
+      </div>
     </div>
   </div>
-</div>
 
 
-<!-- Exercise1 Container -->
-<div class="w3-container w3-opacity" id="exercise1" style="padding:64px 16px">
-  <div class="w3-content" style="max-width:800px">
-    <h1 class="w3-center w3-padding-large"><span :class="{'w3-header':true, 'correct':q1a.solved}" style="font-size:36px">Exercise 1</span></h5>
-    <p>Given the following equation, estimate the value <strong>MPG</strong> will take if the <strong>Weight</strong> provided is <strong>5000</strong>! $${MPG = 46.32 + -0.0077*Weight}$$</p>
-    <input id="answer1a" size="40"></input>
-    <button class="w3-button w3-border" type="button" @click="submit1a()">Check Answer</button>
-    <feedback :status="q1a.status" :correct="q1a.correct" :incorrect="q1a.incorrect"></feedback>
+  <!-- Exercise1 Container -->
+  <div class="w3-container w3-opacity" id="exercise1" style="padding:64px 16px">
+    <div class="w3-content" style="max-width:800px">
+      <h1 class="w3-center w3-padding-large"><span :class="{'w3-header':true, 'correct':q1a.solved}" style="font-size:36px">Exercise 1</span></h5>
+      <p>Given the following equation, estimate the value <strong>MPG</strong> will take if the <strong>Weight</strong> provided is <strong>5000</strong>! $${MPG = 46.32 + -0.0077*Weight}$$</p>
+      <input id="answer1a" size="40"></input>
+      <button class="w3-button w3-border" type="button" @click="submit1a()">Check Answer</button>
+      <feedback :status="q1a.status" :correct="q1a.correct" :incorrect="q1a.incorrect"></feedback>
+    </div>
   </div>
-</div>
 
-<!-- Exercise2 Container -->
-<div class="w3-container w3-opacity" id="exercise2" style="padding:64px 16px">
-  <div class="w3-content" style="max-width:800px">
-    <h1 class="w3-center w3-padding-large"><span :class="{'w3-header':true, 'correct':q1b.solved}" style="font-size:36px">Exercise 2</span></h5>
-    <p>Perform a simple linear regression with MPG as the dependent variable and Acceleration as the indepedent variable!
-    The data has already been loaded for you within the variable df.</p>
-    <pre class="w3-border" style="padding:20px">
-<code contenteditable id="answer1b">import statsmodels.formula.api as smf
+  <!-- Exercise2 Container -->
+  <div class="w3-container w3-opacity" id="exercise2" style="padding:64px 16px">
+    <div class="w3-content" style="max-width:800px">
+      <h1 class="w3-center w3-padding-large"><span :class="{'w3-header':true, 'correct':q1b.solved}" style="font-size:36px">Exercise 2</span></h5>
+      <p>Perform a simple linear regression with MPG as the dependent variable and Acceleration as the indepedent variable!
+      The data has already been loaded for you within the variable df.</p>
+<textarea contenteditable id="answer1b">import statsmodels.formula.api as smf
 ols = smf.ols(formula='mpg ~ weight', data=df)
 ols_result = ols.fit()
 print(ols_result.summary())
-</code>
-    </pre>
-    <button class="w3-button w3-border" type="button" @click="submit1b()">Check Answer</button>
-    <feedback :status="q1b.status" :correct="q1b.correct" :incorrect="q1b.incorrect"></feedback>
+</textarea>
+      <button class="w3-button w3-border" type="button" @click="submit1b()">Check Answer</button>
+      <feedback :status="q1b.status" :correct="q1b.correct" :incorrect="q1b.incorrect"></feedback>
+    </div>
   </div>
-</div>
-  
-<!-- End Page Content -->
-</div>
+    
+  <!-- End Page Content -->
+  </div>
 
-<!-- Footer -->
-<footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large"> 
-  <p>Tutorial created by Team 1d4 (Brandon, Daniel, Meng Yuan, Nelson) for our BT3103 Module Project</p>
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
-</footer>
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large"> 
+    <p>Tutorial created by Team 1d4 (Brandon, Daniel, Meng Yuan, Nelson) for our BT3103 Module Project</p>
+    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+  </footer>
 
-</body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-<script src="./scripts/utils.js"></script>
-<script src="./scripts/simpleRegression.js"></script>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="./scripts/utils.js"></script>
+  <script src="./scripts/simpleRegression.js"></script>
 </html>

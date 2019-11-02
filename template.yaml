@@ -38,9 +38,7 @@ Resources:
                 - lambda.amazonaws.com
                 - dynamodb.amazonaws.com
       ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
-        - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
-        - arn:aws:iam::aws:policy/service-role/AWSLambdaDynamoDBExecutionRole
+        - arn:aws:iam::429061403335:policy/RegressionAnalysis1d4FunctionRole
       Path: /
     Type: AWS::IAM::Role
   LambdaFunc:
