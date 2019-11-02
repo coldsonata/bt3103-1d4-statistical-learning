@@ -68,7 +68,7 @@ let fuee = new Vue({
             let entered = parseCode("answer1b");
             this.q1b.status = "checking";
             let result = await new Promise((resolve, reject) => {
-                const nekoUrl = "https://1b1u6ce6m6.execute-api.us-east-1.amazonaws.com/Prod/lambda_handler";
+                const nekoUrl = window.location.origin + "/Prod/lambda_handler"
                 const xmlHttp = new XMLHttpRequest();
                 xmlHttp.onreadystatechange = function() {
                     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
