@@ -10,7 +10,7 @@ dynamodb = boto3.resource('dynamodb')
 def save_logs(logData):
     timestamp = str(datetime.utcnow().timestamp())
 
-    table = dynamodb.Table('lambdalogs')
+    table = dynamodb.Table('testTable')
     
     log = logData.copy() 
     log['logId'] = str(timestamp) 
@@ -19,7 +19,6 @@ def save_logs(logData):
     table.put_item(Item=log)
 
 def lambda_handler(event, context):
-    dynamodb = boto3.resource('dynamodb')
     method = event.get('httpMethod', {})
     if method == 'GET':
         path = event.get('path')
